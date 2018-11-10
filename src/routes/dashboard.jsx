@@ -21,7 +21,7 @@ const dashboardRoutes = [
   {
     path: "/dashboard",
     sidebarName: "Dashboard",
-    navbarName: "Jdcanado t Dashboard",
+    navbarName: "Jdcanado tes Dashboard",
     icon: Dashboard,
     component: DashboardPage
   },
