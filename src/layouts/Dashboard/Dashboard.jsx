@@ -35,8 +35,10 @@ class App extends React.Component {
     this.state = {
       mobileOpen: false
     };
+
     this.resizeFunction = this.resizeFunction.bind(this);
   }
+
   handleDrawerToggle = () => {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
@@ -65,8 +67,10 @@ class App extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.resizeFunction);
   }
+
   render() {
     const { classes, ...rest } = this.props;
+
     return (
       <div className={classes.wrapper}>
         <Sidebar

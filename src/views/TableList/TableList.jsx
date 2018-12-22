@@ -39,8 +39,44 @@ const styles = {
   }
 };
 
+//const teste = preencherLista();
+
+let teste;
+
+preencherLista();
+
+function preencherLista() {
+  const {
+    Stitch,
+    RemoteMongoClient,
+    AnonymousCredential
+  } = require("mongodb-stitch-browser-sdk");
+
+  const client = Stitch.initializeDefaultAppClient("todo_app-juwtx");
+
+  const db = client
+    .getServiceClient(RemoteMongoClient.factory, "mongodb-atlas")
+    .db("todo");
+
+  client.auth
+    .loginWithCredential(new AnonymousCredential())
+    .then(() =>
+      db
+        .collection("items")
+        .find()
+        .asArray()
+    )
+    .then(docs => {
+      teste = [[docs[5].nome, docs[5].number, docs[5].nome, docs[5].number]];                 
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+
 function TableList(props) {
   const { classes } = props;
+
   return (
     <GridContainer>
       <GridItem xs={12} sm={12} md={12}>
@@ -54,15 +90,8 @@ function TableList(props) {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Name", "Country", "City", "Salary"]}
-              tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                ["Mason Porter", "Chile", "Gloucester", "$78,615"]
-              ]}
+              tableHead={["Nome", "Número", "Id", "Time"]}
+              tableData={teste}
             />
           </CardBody>
         </Card>
