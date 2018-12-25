@@ -39,8 +39,6 @@ const styles = {
   }
 };
 
-//const teste = preencherLista();
-
 let teste;
 
 preencherLista();
@@ -67,7 +65,7 @@ function preencherLista() {
         .asArray()
     )
     .then(docs => {
-      teste = [[docs[5].nome, docs[5].number, docs[5].nome, docs[5].number]];                 
+      teste = docs.map(el => Object.keys(el).map(key => el[key].toString()));      
     })
     .catch(err => {
       console.error(err);
@@ -90,7 +88,7 @@ function TableList(props) {
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["Nome", "Número", "Id", "Time"]}
+              tableHead={["Id", "Owner_id", "Número", "Nome", "Time"]}
               tableData={teste}
             />
           </CardBody>
